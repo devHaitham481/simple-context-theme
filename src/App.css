@@ -1,3 +1,5 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.container {
+  margin: 2rem;
+}
+
+.card {
+  margin: 0 auto;
 }
