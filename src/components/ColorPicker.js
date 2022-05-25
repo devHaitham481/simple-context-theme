@@ -2,39 +2,45 @@ import React, { useEffect, useState } from "react";
 
 import { SketchPicker, HuePicker, ChromePicker } from "react-color";
 import { ThemeContext, useThemeContext } from "../context/theme-context";
-import { useRenderCount } from "@gilbarbara/hooks";
 
 import ColorScheme from "color-scheme";
 
-const mapColorScheme = (colors, theme) => {
-  Object.keys(theme).forEach(
-    (key, index) => (theme[key] = "#".concat(colors[index]))
+const mapColorSchemes = (colors, theme) => {
+  const palette = Object.assign(
+    {},
+    ...Object.keys(theme).map((k, i) => ({ [k]: "#".concat(colors[i + 1]) }))
   );
-  return theme;
+  console.log("palette", palette, theme);
+  return palette;
 };
 
 const ColorPicker = () => {
   const { theme, setTheme } = useThemeContext();
   const [stateColor, setStateColor] = useState("#43094");
-  //   console.log("renderCountColorPicker", useRenderCount());
 
-  useEffect(() => {
+  const handleColorPalete = (c) => {
     let scheme = new ColorScheme();
-    if (typeof stateColor === "string") return;
-    scheme.from_hue(stateColor.hsl.h).scheme("mono").variation("soft");
+
+    scheme.from_hue(c.hsl.h).scheme("contrast").variation("default");
 
     const colorPalette = scheme.colors();
-
-    setTheme(mapColorScheme(colorPalette, theme));
-    console.log("Theme", theme);
-  }, [stateColor]);
+    console.log("theme inside color Picker before setting", theme);
+    console.log("color", colorPalette);
+    setTheme(mapColorSchemes(colorPalette, theme));
+    console.log(
+      "mapColorScheme inside handleColorPalette",
+      mapColorSchemes(colorPalette, theme)
+    );
+    console.log("theme inside color Picker after setting", theme);
+  };
 
   return (
     <div>
-      <ChromePicker
+      <HuePicker
         color={stateColor}
         onChangeComplete={(color) => {
           setStateColor(color);
+          handleColorPalete(color);
         }}
       />
     </div>

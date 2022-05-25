@@ -1,24 +1,24 @@
 import "./App.css";
 import Layout from "./components/Layout";
-import { ThemeContextProvider, defaultTheme } from "./context/theme-context";
+import { initialValue, ThemeContextProvider } from "./context/theme-context";
 import { useState } from "react";
-import ColorPicker from "./components/ColorPicker";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  // const [theme, setTheme] = useState(themes.dark);
-
-  // const toggleTheme = () => {
-  //   theme === themes.dark ? setTheme(themes.light) : setTheme(themes.dark);
-  //   console.log(theme);
-  // };
-
   return (
-    <ThemeContextProvider>
-      <div className="container">
-        <Layout></Layout>
-        <ColorPicker />
-      </div>
-    </ThemeContextProvider>
+    <Router>
+      <ThemeContextProvider initialValue={initialValue}>
+        <div className="container">
+          <Layout>
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+            </Routes>
+          </Layout>
+        </div>
+      </ThemeContextProvider>
+    </Router>
   );
 }
 

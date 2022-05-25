@@ -53,3 +53,41 @@
 .card {
   margin: 0 auto;
 }
+
+.theme-color {
+  height: 30px;
+  width: 30px;
+  margin: 2rem auto;
+}
+
+.color-picker {
+  float: right;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.site-page-header {
+}
+
+.dashboard-container {
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.color-picker-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.color-picker {
+  position: absolute;
+  right: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
